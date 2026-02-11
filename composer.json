@@ -30,11 +30,13 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/jsirish/foxystripe"
+            "url": "https://github.com/jsirish/foxystripe",
+            "no-api": true
         },
         {
             "type": "vcs",
-            "url": "https://github.com/dynamic/foxyclient-php"
+            "url": "https://github.com/dynamic/foxyclient-php",
+            "no-api": true
         }
     ],
     "config": {
