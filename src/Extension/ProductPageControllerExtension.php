@@ -106,6 +106,6 @@ class ProductPageControllerExtension extends Extension
      */
     protected function getReservationHash($code, $id, $expires)
     {
-        return md5($code.$id.$expires);
+        return md5($code . $id . $expires);
     }
 }
