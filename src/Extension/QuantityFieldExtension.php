@@ -12,7 +12,6 @@ use SilverStripe\Core\Extension;
  */
 class QuantityFieldExtension extends Extension
 {
-
     public function onBeforeRender()
     {
         if (!$this->owner->getProduct()->hasMethod('getHasInventory')) {

@@ -16,7 +16,6 @@ use SilverStripe\Forms\HiddenField;
  */
 class PurchaseFormExtension extends Extension
 {
-
     /**
      * @param \SilverStripe\Forms\FieldList $fields
      */
