@@ -27,6 +27,16 @@
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jsirish/foxystripe"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/dynamic/foxyclient-php"
+        }
+    ],
     "config": {
         "process-timeout": 600
     },
