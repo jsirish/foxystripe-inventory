@@ -7,7 +7,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\ReadonlyField;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 
 /**
@@ -19,7 +19,7 @@ use UncleCheese\DisplayLogic\Forms\Wrapper;
  *
  * @property-read \Dynamic\FoxyStripe\Model\OptionItem $owner
  */
-class FoxyStripeOptionInventoryManager extends DataExtension
+class FoxyStripeOptionInventoryManager extends Extension
 {
     /**
      * @var array
@@ -42,13 +42,13 @@ class FoxyStripeOptionInventoryManager extends DataExtension
 
         $fields->addFieldsToTab('Root.Inventory', array(
             CheckboxField::create('ControlInventory', 'Control Inventory?')
-                ->setDescription('limit the number of this product available for purchase'),
+            ->setDescription('limit the number of this product available for purchase'),
             Wrapper::create(
-                NumericField::create('PurchaseLimit')
-                    ->setTitle('Number Available')
-                    ->setDescription('add to cart form will be disabled once number available equals purchased'),
-                ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased())//,
-            )->displayIf('ControlInventory')->isChecked()->end(),
+            NumericField::create('PurchaseLimit')
+            ->setTitle('Number Available')
+            ->setDescription('add to cart form will be disabled once number available equals purchased'),
+            ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased()) //,
+        )->displayIf('ControlInventory')->isChecked()->end(),
         ));
     }
 

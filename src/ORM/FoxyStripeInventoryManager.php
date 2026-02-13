@@ -7,9 +7,8 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\ReadonlyField;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\Forms\DropdownField;
 use SilverStripe\Core\Extension;
+use SilverStripe\Forms\DropdownField;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 
 /**
@@ -22,7 +21,7 @@ use UncleCheese\DisplayLogic\Forms\Wrapper;
  *
  * @property-read \Dynamic\FoxyStripe\Page\ProductPage|\Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManager $owner
  */
-class FoxyStripeInventoryManager extends DataExtension
+class FoxyStripeInventoryManager extends Extension
 {
     /**
      * @var array
@@ -46,18 +45,18 @@ class FoxyStripeInventoryManager extends DataExtension
 
         $fields->addFieldsToTab('Root.Inventory', array(
             CheckboxField::create('ControlInventory', 'Control Inventory?')
-                ->setDescription('limit the number of this product available for purchase'),
+            ->setDescription('limit the number of this product available for purchase'),
             Wrapper::create(
-                NumericField::create('PurchaseLimit')
-                    ->setTitle('Number Available')
-                    ->setDescription('add to cart form will be disabled once number available equals purchased'),
-                ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased())//,
-                /*
-                NumericField::create('EmbargoLimit')
-                ->setTitle('Embargo Time')
-                ->setDescription('time in seconds to reserve an item once added to cart')
-                */
-            )->displayIf('ControlInventory')->isChecked()->end(),
+            NumericField::create('PurchaseLimit')
+            ->setTitle('Number Available')
+            ->setDescription('add to cart form will be disabled once number available equals purchased'),
+            ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased()) //,
+            /*
+     NumericField::create('EmbargoLimit')
+     ->setTitle('Embargo Time')
+     ->setDescription('time in seconds to reserve an item once added to cart')
+     */
+        )->displayIf('ControlInventory')->isChecked()->end(),
         ));
     }
 

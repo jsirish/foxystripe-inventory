@@ -9,14 +9,14 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
 use SilverStripe\Forms\NumericField;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\ORM\ValidationResult;
 
 /**
  * Class ProductPageDataExtension
  * @package Dynamic\Sheeps\ProductCartExpiry\ORM
  */
-class ProductPageDataExtension extends DataExtension
+class ProductPageDataExtension extends Extension
 {
     /**
      * @var array
@@ -40,10 +40,10 @@ class ProductPageDataExtension extends DataExtension
     {
         $expirationFields = [
             CheckboxField::create('CartExpiration')
-                ->setTitle('Cart Product Expiration'),
+            ->setTitle('Cart Product Expiration'),
             $duration = NumericField::create('ExpirationMinutes')
-                ->setTitle('Expiration In Minutes')
-                ->setDescription("After the time listed above in minutes, this product will be removed from the user's cart"),
+            ->setTitle('Expiration In Minutes')
+            ->setDescription("After the time listed above in minutes, this product will be removed from the user's cart"),
         ];
 
         $duration->displayIf('CartExpiration')->isChecked()->end();
@@ -53,8 +53,8 @@ class ProductPageDataExtension extends DataExtension
                 'CartReservations',
                 'Cart Reservations',
                 $this->owner->CartReservations()
-                    ->filter('Expires:GreaterThan', date('Y-m-d H:i:s', strtotime('now')))
-                    ->sort('Created'),
+                ->filter('Expires:GreaterThan', date('Y-m-d H:i:s', strtotime('now')))
+                ->sort('Created'),
                 $cartResConfig = GridFieldConfig_RecordViewer::create()
             );
             $expirationGrid->displayIf('CartExpiration')->isChecked()->end();
@@ -76,9 +76,9 @@ class ProductPageDataExtension extends DataExtension
         if ($this->owner->CartExpiration && $this->owner->ExpirationMinutes < 1) {
             $validationResult
                 ->addFieldError(
-                    'ExpirationMinutes',
-                    'You must set the "Expiration In Minutes" or disable "Cart Product Expiration"'
-                );
+                'ExpirationMinutes',
+                'You must set the "Expiration In Minutes" or disable "Cart Product Expiration"'
+            );
         }
     }
 }
